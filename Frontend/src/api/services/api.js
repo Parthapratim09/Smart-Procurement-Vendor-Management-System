@@ -1,21 +1,17 @@
 import axios from "axios";
 
-/*
-   This is the central API connector to Spring Boot backend
-   Change port ONLY if your backend runs on different port
-*/
 
 const api = axios.create({
-  baseURL: "http://localhost:8097/api", 
+  baseURL: `${import.meta.env.VITE_API_URL}/api`, 
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-/* ===== REQUEST INTERCEPTOR (OPTIONAL LOGIN TOKEN LATER) ===== */
+
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // future JWT
+    const token = localStorage.getItem("token"); 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,7 +20,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-/* ===== RESPONSE INTERCEPTOR ===== */
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
