@@ -65,7 +65,9 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/reports")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+   "https://smart-procurement-vendor-management.vercel.app"
+})
 @RequiredArgsConstructor
 public class ReportController {
 
